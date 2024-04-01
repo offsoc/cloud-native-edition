@@ -1311,6 +1311,8 @@ oxtrust:
   # - /tmp/custom.sh
   # - /tmp/custom2.sh
   customScripts: []
+  # -- Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled
+  istioDestinationRuleCookieTTL: 60s
 
 # -- FIDO 2.0 (FIDO2) is an open authentication standard that enables leveraging common devices to authenticate to online services in both mobile and desktop environments.
 fido2:
@@ -1779,6 +1781,8 @@ casa:
   # - /tmp/custom.sh
   # - /tmp/custom2.sh
   customScripts: []
+  # -- Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled
+  istioDestinationRuleCookieTTL: 60s
 
 # -- Gluu interface to Passport.js to support social login and inbound identity.
 oxpassport:
@@ -1899,6 +1903,8 @@ oxpassport:
   # - /tmp/custom.sh
   # - /tmp/custom2.sh
   customScripts: []
+  # -- Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled
+  istioDestinationRuleCookieTTL: 60s
 
 # -- Shibboleth project for the Gluu Server's SAML IDP functionality.
 oxshibboleth:
@@ -2021,6 +2027,8 @@ oxshibboleth:
   # - /tmp/custom.sh
   # - /tmp/custom2.sh
   customScripts: []
+  # -- Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled
+  istioDestinationRuleCookieTTL: 60s
 
 # -- CacheRefreshRotation is a special container to monitor cache refresh on oxTrust containers. This may be depreciated.
 cr-rotate:
