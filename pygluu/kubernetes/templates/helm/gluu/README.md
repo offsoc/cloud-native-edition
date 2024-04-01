@@ -1,6 +1,6 @@
 # gluu
 
-![Version: 1.8.32](https://img.shields.io/badge/Version-1.8.32-informational?style=flat-square) ![AppVersion: 4.5.3](https://img.shields.io/badge/AppVersion-4.5.3-informational?style=flat-square)
+![Version: 1.8.33](https://img.shields.io/badge/Version-1.8.33-informational?style=flat-square) ![AppVersion: 4.5.3](https://img.shields.io/badge/AppVersion-4.5.3-informational?style=flat-square)
 
 Gluu Access and Identity Mangement
 
@@ -23,29 +23,29 @@ Kubernetes: `>=v1.22.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
-|  | casa | 1.8.32 |
-|  | config | 1.8.32 |
-|  | cr-rotate | 1.8.32 |
-|  | fido2 | 1.8.32 |
-|  | gluu-alb-ingress | 1.8.32 |
-|  | gluu-istio-ingress | 1.8.32 |
-|  | jackrabbit | 1.8.32 |
-|  | nginx-ingress | 1.8.32 |
-|  | opendj | 1.8.32 |
-|  | oxauth | 1.8.32 |
-|  | oxauth-key-rotation | 1.8.32 |
-|  | oxd-server | 1.8.32 |
-|  | oxpassport | 1.8.32 |
-|  | oxshibboleth | 1.8.32 |
-|  | oxtrust | 1.8.32 |
-|  | persistence | 1.8.32 |
-|  | scim | 1.8.32 |
+|  | casa | 1.8.33 |
+|  | config | 1.8.33 |
+|  | cr-rotate | 1.8.33 |
+|  | fido2 | 1.8.33 |
+|  | gluu-alb-ingress | 1.8.33 |
+|  | gluu-istio-ingress | 1.8.33 |
+|  | jackrabbit | 1.8.33 |
+|  | nginx-ingress | 1.8.33 |
+|  | opendj | 1.8.33 |
+|  | oxauth | 1.8.33 |
+|  | oxauth-key-rotation | 1.8.33 |
+|  | oxd-server | 1.8.33 |
+|  | oxpassport | 1.8.33 |
+|  | oxshibboleth | 1.8.33 |
+|  | oxtrust | 1.8.33 |
+|  | persistence | 1.8.33 |
+|  | scim | 1.8.33 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| casa | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/casa","tag":"4.5.3-1"},"lifecycle":{},"livenessProbe":{"httpGet":{"path":"/casa/health-check","port":"http-casa"},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":"90%"},"readinessProbe":{"httpGet":{"path":"/casa/health-check","port":"http-casa"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"500m","memory":"500Mi"}},"service":{"casaServiceName":"casa","name":"http-casa","port":8080},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu Casa ("Casa") is a self-service web portal for end-users to manage authentication and authorization preferences for their account in a Gluu Server. |
+| casa | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/casa","tag":"4.5.3-1"},"istioDestinationRuleCookieTTL":"60s","lifecycle":{},"livenessProbe":{"httpGet":{"path":"/casa/health-check","port":"http-casa"},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":"90%"},"readinessProbe":{"httpGet":{"path":"/casa/health-check","port":"http-casa"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"500m","memory":"500Mi"},"requests":{"cpu":"500m","memory":"500Mi"}},"service":{"casaServiceName":"casa","name":"http-casa","port":8080},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu Casa ("Casa") is a self-service web portal for end-users to manage authentication and authorization preferences for their account in a Gluu Server. |
 | casa.additionalAnnotations | object | `{}` | Additional annotations that will be added across all resources  in the format of {cert-manager.io/issuer: "letsencrypt-prod"}. key app is taken |
 | casa.additionalLabels | object | `{}` | Additional labels that will be added across all resources definitions in the format of {mylabel: "myapp"} |
 | casa.affinity | object | `{}` | https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/ |
@@ -59,6 +59,7 @@ Kubernetes: `>=v1.22.0-0`
 | casa.image.pullSecrets | list | `[]` | Image Pull Secrets |
 | casa.image.repository | string | `"gluufederation/casa"` | Image  to use for deploying. |
 | casa.image.tag | string | `"4.5.3-1"` | Image  tag to use for deploying. |
+| casa.istioDestinationRuleCookieTTL | string | `"60s"` | Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled |
 | casa.livenessProbe | object | `{"httpGet":{"path":"/casa/health-check","port":"http-casa"},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5}` | Configure the liveness healthcheck for casa if needed. |
 | casa.livenessProbe.httpGet.path | string | `"/casa/health-check"` | http liveness probe endpoint |
 | casa.pdb | object | `{"enabled":true,"maxUnavailable":"90%"}` | Configure the PodDisruptionBudget |
@@ -595,7 +596,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxd-server.usrEnvs.secret | object | `{}` | Add custom secret envs to the service variable1: value1 |
 | oxd-server.volumeMounts | list | `[]` | Configure any additional volumesMounts that need to be attached to the containers |
 | oxd-server.volumes | list | `[]` | Configure any additional volumes that need to be attached to the pod |
-| oxpassport | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxpassport","tag":"4.5.3-1"},"lifecycle":{},"livenessProbe":{"failureThreshold":20,"httpGet":{"path":"/passport/health-check","port":"http-passport"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":"90%"},"readinessProbe":{"failureThreshold":20,"httpGet":{"path":"/passport/health-check","port":"http-passport"},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"700m","memory":"900Mi"},"requests":{"cpu":"700m","memory":"900Mi"}},"service":{"name":"http-passport","oxPassportServiceName":"oxpassport","port":8090},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu interface to Passport.js to support social login and inbound identity. |
+| oxpassport | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxpassport","tag":"4.5.3-1"},"istioDestinationRuleCookieTTL":"60s","lifecycle":{},"livenessProbe":{"failureThreshold":20,"httpGet":{"path":"/passport/health-check","port":"http-passport"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":"90%"},"readinessProbe":{"failureThreshold":20,"httpGet":{"path":"/passport/health-check","port":"http-passport"},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"700m","memory":"900Mi"},"requests":{"cpu":"700m","memory":"900Mi"}},"service":{"name":"http-passport","oxPassportServiceName":"oxpassport","port":8090},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu interface to Passport.js to support social login and inbound identity. |
 | oxpassport.additionalAnnotations | object | `{}` | Additional annotations that will be added across all resources  in the format of {cert-manager.io/issuer: "letsencrypt-prod"}. key app is taken |
 | oxpassport.additionalLabels | object | `{}` | Additional labels that will be added across all resources definitions in the format of {mylabel: "myapp"} |
 | oxpassport.affinity | object | `{}` | https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/ |
@@ -609,6 +610,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxpassport.image.pullSecrets | list | `[]` | Image Pull Secrets |
 | oxpassport.image.repository | string | `"gluufederation/oxpassport"` | Image  to use for deploying. |
 | oxpassport.image.tag | string | `"4.5.3-1"` | Image  tag to use for deploying. |
+| oxpassport.istioDestinationRuleCookieTTL | string | `"60s"` | Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled |
 | oxpassport.livenessProbe | object | `{"failureThreshold":20,"httpGet":{"path":"/passport/health-check","port":"http-passport"},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5}` | Configure the liveness healthcheck for oxPassport if needed. |
 | oxpassport.livenessProbe.httpGet.path | string | `"/passport/health-check"` | http liveness probe endpoint |
 | oxpassport.pdb | object | `{"enabled":true,"maxUnavailable":"90%"}` | Configure the PodDisruptionBudget |
@@ -630,7 +632,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxpassport.usrEnvs.secret | object | `{}` | Add custom secret envs to the service variable1: value1 |
 | oxpassport.volumeMounts | list | `[]` | Configure any additional volumesMounts that need to be attached to the containers |
 | oxpassport.volumes | list | `[]` | Configure any additional volumes that need to be attached to the pod |
-| oxshibboleth | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxshibboleth","tag":"4.5.3-4"},"lifecycle":{},"livenessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":1},"readinessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"1000m","memory":"1000Mi"},"requests":{"cpu":"1000m","memory":"1000Mi"}},"service":{"name":"http-oxshib","oxShibbolethServiceName":"oxshibboleth","port":8080,"sessionAffinity":"ClientIP"},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Shibboleth project for the Gluu Server's SAML IDP functionality. |
+| oxshibboleth | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxshibboleth","tag":"4.5.3-4"},"istioDestinationRuleCookieTTL":"60s","lifecycle":{},"livenessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":1},"readinessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"1000m","memory":"1000Mi"},"requests":{"cpu":"1000m","memory":"1000Mi"}},"service":{"name":"http-oxshib","oxShibbolethServiceName":"oxshibboleth","port":8080,"sessionAffinity":"ClientIP"},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Shibboleth project for the Gluu Server's SAML IDP functionality. |
 | oxshibboleth.additionalAnnotations | object | `{}` | Additional annotations that will be added across all resources  in the format of {cert-manager.io/issuer: "letsencrypt-prod"}. key app is taken |
 | oxshibboleth.additionalLabels | object | `{}` | Additional labels that will be added across all resources definitions in the format of {mylabel: "myapp"} |
 | oxshibboleth.affinity | object | `{}` | https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/ |
@@ -644,6 +646,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxshibboleth.image.pullSecrets | list | `[]` | Image Pull Secrets |
 | oxshibboleth.image.repository | string | `"gluufederation/oxshibboleth"` | Image  to use for deploying. |
 | oxshibboleth.image.tag | string | `"4.5.3-4"` | Image  tag to use for deploying. |
+| oxshibboleth.istioDestinationRuleCookieTTL | string | `"60s"` | Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled |
 | oxshibboleth.livenessProbe | object | `{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5}` | Configure the liveness healthcheck for the oxshibboleth if needed. |
 | oxshibboleth.livenessProbe.exec | object | `{"command":["python3","/app/scripts/healthcheck.py"]}` | Executes the python3 healthcheck. https://github.com/GluuFederation/docker-oxshibboleth/blob/4.5/scripts/healthcheck.py |
 | oxshibboleth.pdb | object | `{"enabled":true,"maxUnavailable":1}` | Configure the PodDisruptionBudget |
@@ -664,7 +667,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxshibboleth.usrEnvs.secret | object | `{}` | Add custom secret envs to the service variable1: value1 |
 | oxshibboleth.volumeMounts | list | `[]` | Configure any additional volumesMounts that need to be attached to the containers |
 | oxshibboleth.volumes | list | `[]` | Configure any additional volumes that need to be attached to the pod |
-| oxtrust | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxtrust","tag":"4.5.3-1"},"lifecycle":{},"livenessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":1},"readinessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"2500m","memory":"2500Mi"},"requests":{"cpu":"2500m","memory":"2500Mi"}},"service":{"clusterIp":"None","name":"http-oxtrust","oxTrustServiceName":"oxtrust","port":8080},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu Admin UI. This shouldn't be internet facing. |
+| oxtrust | object | `{"additionalAnnotations":{},"additionalLabels":{},"affinity":{},"customScripts":[],"dnsConfig":{},"dnsPolicy":"","hpa":{"behavior":{},"enabled":true,"maxReplicas":10,"metrics":[],"minReplicas":1,"targetCPUUtilizationPercentage":50},"image":{"pullPolicy":"IfNotPresent","pullSecrets":[],"repository":"gluufederation/oxtrust","tag":"4.5.3-1"},"istioDestinationRuleCookieTTL":"60s","lifecycle":{},"livenessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5},"nodeSelector":{},"pdb":{"enabled":true,"maxUnavailable":1},"readinessProbe":{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":25,"periodSeconds":25,"timeoutSeconds":5},"replicas":1,"resources":{"limits":{"cpu":"2500m","memory":"2500Mi"},"requests":{"cpu":"2500m","memory":"2500Mi"}},"service":{"clusterIp":"None","name":"http-oxtrust","oxTrustServiceName":"oxtrust","port":8080},"tolerations":[],"topologySpreadConstraints":{},"usrEnvs":{"normal":{},"secret":{}},"volumeMounts":[],"volumes":[]}` | Gluu Admin UI. This shouldn't be internet facing. |
 | oxtrust.additionalAnnotations | object | `{}` | Additional annotations that will be added across all resources  in the format of {cert-manager.io/issuer: "letsencrypt-prod"}. key app is taken |
 | oxtrust.additionalLabels | object | `{}` | Additional labels that will be added across all resources definitions in the format of {mylabel: "myapp"} |
 | oxtrust.affinity | object | `{}` | https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/ |
@@ -678,6 +681,7 @@ Kubernetes: `>=v1.22.0-0`
 | oxtrust.image.pullSecrets | list | `[]` | Image Pull Secrets |
 | oxtrust.image.repository | string | `"gluufederation/oxtrust"` | Image  to use for deploying. |
 | oxtrust.image.tag | string | `"4.5.3-1"` | Image  tag to use for deploying. |
+| oxtrust.istioDestinationRuleCookieTTL | string | `"60s"` | Istio Destination Rule loadBalancer.consistentHash.httpCookie.ttl if istio ingress is enabled |
 | oxtrust.livenessProbe | object | `{"exec":{"command":["python3","/app/scripts/healthcheck.py"]},"initialDelaySeconds":30,"periodSeconds":30,"timeoutSeconds":5}` | Configure the liveness healthcheck for the auth server if needed. |
 | oxtrust.livenessProbe.exec | object | `{"command":["python3","/app/scripts/healthcheck.py"]}` | Executes the python3 healthcheck. https://github.com/GluuFederation/docker-oxauth/blob/4.4/scripts/healthcheck.py |
 | oxtrust.pdb | object | `{"enabled":true,"maxUnavailable":1}` | Configure the PodDisruptionBudget |
